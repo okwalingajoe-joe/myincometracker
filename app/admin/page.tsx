@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { ArrowLeft, Users } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 import {
   Table,
@@ -23,6 +24,7 @@ export default async function AdminPage() {
   const supabase = await createClient()
   const {
     data: { user },
+  } = await supabase.auth.getUser()
   if (!user) redirect("/auth/login?next=/admin")
 
   // Check owner flag
